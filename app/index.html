@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Bank — Create Account (Mule API)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <header class="header">
+    <h1>Bank — Create Account</h1>
+
+    <div class="env">
+      <label for="baseUrl">API Base URL</label>
+      <input id="baseUrl" value="http://localhost:8081" />
+      <button id="saveBaseUrl">Save</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- ===== AUTH SECTION ===== -->
+    <section class="card">
+      <h2>Security / Auth</h2>
+      <div class="row">
+        <div class="field">
+          <label for="authType">Auth Type</label>
+          <select id="authType">
+            <option value="none">None</option>
+            <option value="basic">Basic Auth</option>
+            <option value="bearer">Bearer Token</option>
+            <option value="apikey">API Key</option>
+          </select>
+        </div>
+
+        <div class="field auth-basic">
+          <label for="basicUser">Username</label>
+          <input id="basicUser" placeholder="username" />
+        </div>
+        <div class="field auth-basic">
+          <label for="basicPass">Password</label>
+          <input id="basicPass" type="password" placeholder="password" />
+        </div>
+
+        <div class="field auth-bearer">
+          <label for="bearerToken">Bearer Token</label>
+          <input id="bearerToken" placeholder="eyJhbGciOi..." />
+        </div>
+
+        <div class="field auth-apikey">
+          <label for="apiKeyHeader">API Key Header</label>
+          <input id="apiKeyHeader" placeholder="x-api-key" value="x-api-key" />
+        </div>
+        <div class="field auth-apikey">
+          <label for="apiKeyValue">API Key Value</label>
+          <input id="apiKeyValue" placeholder="your-api-key" />
+        </div>
+      </div>
+      <p class="hint">These values are stored locally in your browser for convenience only.</p>
+    </section>
+
+    <!-- ===== FORM: QUERY PARAMS ===== -->
+    <section class="card">
+      <h2>Account Holder & Bank Details (Query Params)</h2>
+      <div class="row">
+        <div class="field">
+          <label for="customerName">Customer Name <span class="req">*</span></label>
+          <input id="customerName" placeholder="Full name" minlength="4" maxlength="45" />
+        </div>
+
+        <div class="field">
+          <label for="bank">Bank <span class="req">*</span></label>
+          <select id="bank">
+            <option value="">-- Select --</option>
+            <option value="ICICI">ICICI</option>
+            <option value="AXIS">AXIS</option>
+            <option value="HDFC">HDFC</option>
+            <option value="SBI">SBI</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="type">Account Type <span class="req">*</span></label>
+          <select id="type">
+            <option value="">-- Select --</option>
+            <option value="savings">savings</option>
+            <option value="current">current</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="branchName">Branch Name <span class="req">*</span></label>
+          <input id="branchName" placeholder="e.g., Vizag01" minlength="4" maxlength="10" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FORM: JSON BODY ===== -->
+    <section class="card">
+      <h2>Account Data (JSON Body)</h2>
+      <div class="row">
+        <div class="field">
+          <label for="accountNum">Account Number <span class="req">*</span></label>
+          <input id="accountNum" placeholder="1234567890" inputmode="numeric" />
+        </div>
+
+        <div class="field">
+          <label for="atmPin">ATM PIN <span class="req">*</span></label>
+          <input id="atmPin" type="password" placeholder="4 digits" maxlength="6" />
+        </div>
+
+        <div class="field">
+          <label for="depositAmount">Initial Deposit</label>
+          <input id="depositAmount" type="number" step="0.01" placeholder="0" />
+        </div>
+
+        <div class="field">
+          <label for="ifscCode">IFSC Code <span class="req">*</span></label>
+          <input id="ifscCode" placeholder="HDFC00022" />
+        </div>
+
+        <div class="field">
+          <label for="contact">Contact Number <span class="req">*</span></label>
+          <input id="contact" placeholder="9876543210" inputmode="numeric" />
+        </div>
+
+        <div class="field">
+          <label for="mailId">Email ID <span class="req">*</span></label>
+          <input id="mailId" type="email" placeholder="name@example.com" />
+        </div>
+      </div>
+
+      <div class="actions">
+        <button id="submitBtn">Create Account</button>
+        <button class="secondary" id="resetBtn">Reset</button>
+      </div>
+    </section>
+
+    <!-- ===== RESULT ===== -->
+    <section class="card">
+      <h2>Result</h2>
+      <div id="status" class="status"></div>
+      <pre id="raw" class="raw"></pre>
+
+      <div class="actions">
+        <button class="secondary" id="copyCurlBtn">Copy cURL</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <small>
+      Frontend for Mule API:
+      <code>POST /api/createAccount</code>
+    </small>
+  </footer>
+
+  <script src="./app.js"></script>
+</body>
+</html>
